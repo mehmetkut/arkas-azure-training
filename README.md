@@ -1,1 +1,1 @@
-# arkas-azure-training
+# Arkas Azure Training
