@@ -1,0 +1,1 @@
+# arkas-azure-training
