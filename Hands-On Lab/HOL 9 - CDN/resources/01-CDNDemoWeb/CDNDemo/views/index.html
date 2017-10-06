@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <title>DustyDog</title>
+    <meta charset="utf-8" />
+    <script>
+        var startTime = new Date().getTime();
+        var loaded = false;
+
+        function cdnFinishload() {
+            var loadtime = new Date().getTime() - startTime;
+            $("#cdnLoadTime").html(loadtime + " ms");
+        }
+
+        function originFinishload() {
+            var loadtime = new Date().getTime() - startTime;
+            $("#websiteLoadTime").html(loadtime + " ms");
+        }
+
+        function loadPictures() {
+            if (loaded) {
+                $("#leftPic").html("");
+                $("#rightPic").html("");
+                loaded = false;
+                $('#button').html("Refresh");
+            } else {
+                startTime = new Date().getTime();
+                $("#leftPic").html("<img src=\"https://cdnhol09.azureedge.net/Image_01.jpg\" height=\"512\" width=\"384\" onload=\"cdnFinishload()\"/>");
+                $("#rightPic").html("<img src=\"https://sacdnho09.blob.core.windows.net/resources/Image_01.jpg\" height=\"512\" width=\"384\" onload=\"originFinishload()\"/>");
+                $('#button').html("Clear");
+                loaded = true;
+            }
+        }
+
+    </script>
+    <style>
+        .cell {
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        #tableContainer-1 {
+            height: 100%;
+            width: 100%;
+            display: table;
+        }
+
+        #tableContainer-2 {
+            vertical-align: middle;
+            display: table-cell;
+            height: 100%;
+        }
+
+        #myTable {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="base" style="align-items: center; justify-content: center; width: 100%; height: 100%; padding: 50px; text-align: center">
+
+        <div id="body" style="margin: 0 auto;">
+            <div style="font-size: 50px; font-family: Calibri">Dusty Dog Pet Care</div>
+            <div id="tableContainer-1">
+                <div id="tableContainer-2">
+                    <table id="myTable">
+                        <tr>
+                            <td class="cell" style="font-family: Calibri">
+                                <div>Picture load from Azure CDN</div>
+                            </td>
+                            <td class="cell" style="font-family: Calibri">
+                                <div>Picture load directly from website</div>
+                            </td>
+                        </tr>
+                        <tr style="font-family: Calibri">
+                            <td class="cell"><a>http://dustydog.azureedge.net/pictures/dog1/petcare.png</a> </td>
+                            <td class="cell"><a>http://dustydogwebapp.azurewebsites.net/pictures/dog1/petcare.png</a> </td>
+                        </tr>
+                        <tr>
+                            <td class="cell">
+                                <div id="leftPic"></div>
+                            </td>
+                            <td class="cell">
+                                <div id="rightPic"></div>
+                            </td>
+                        </tr>
+                        <tr style="font-family: Calibri; font-size: 30px">
+                            <td class="cell" id="cdnLoadTime"></td>
+                            <td class="cell" id ="websiteLoadTime"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <button id ="button" type="button" class="btn btn-primary btn-lg btn-block" onclick="loadPictures()" style="margin-bottom: 50px; padding-left: 100px; padding-right: 100px">Refresh</button>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
